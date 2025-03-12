@@ -136,14 +136,17 @@ private func calculateScore(_ userInput: [Int], _ correctAnswer: [Int]) -> (stri
     return (strike, ball) // 튜플로 결과 반환
 }
 
-//결과 출력 (스트라이크 & 볼 개수에 따른 메시지)
+// 결과 출력 (스트라이크 & 볼 개수에 따른 메시지)
 private func displayResult(_ strike: Int, _ ball: Int) {
     if strike == 3 {
-        print("정답입니다!") // 3 스트라이크 시 정답 처리
-    } else if strike == 0 && ball == 0 {
-        print("Nothing") // 스트라이크와 볼이 모두 없을 때
-    } else {
-        print("\(strike) 스트라이크, \(ball) 볼") // 결과 출력
+        print("정답입니다!")
+        return
     }
+
+    var result = [String]()
+    if strike > 0 { result.append("\(strike) 스트라이크") }
+    if ball > 0 { result.append("\(ball) 볼") }
+
+    print(result.isEmpty ? "Nothing" : result.joined(separator: ", "))
 }
 
