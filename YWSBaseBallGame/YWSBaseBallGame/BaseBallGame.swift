@@ -23,20 +23,88 @@
 //            - 092 → 불가능
 //            - 870 → 가능
 //            - 300 → 불가능
+//    - [✅] 프로그램을 시작할 때 안내문구를 보여주세요
+//        - 1번 게임 시작하기의 경우 “필수 구현 기능” 의 예시처럼 게임이 진행됩니다
+//            - 정답을 맞혀 게임이 종료된 경우 위 안내문구를 다시 보여주세요
+//                - 예시
+//                    환영합니다! 원하시는 번호를 입력해주세요
+//                    1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기
+//                    1 // 1번 게임 시작하기 입력
+//
+//                    < 게임을 시작합니다 >
+//                    숫자를 입력하세요
+//    - [✅] 2번 게임 기록 보기의 경우 완료한 게임들에 대해 시도 횟수를 보여줍니다
+//    - [✅] 3번 종료하기의 경우 프로그램이 종료됩니다
+//        - 이전의 게임 기록들도 초기화됩니다
+//    - [✅] 1, 2, 3 이외의 입력값에 대해서는 오류 메시지를 보여주세요
+//
+//
+//
+//
+
+import Foundation
 
 class BaseBallGame {
-    
-    // 게임 시작 메서드 (게임 흐름을 관리)
-    func start() {
-        gameIntroMessage() // 게임 시작 메시지 출력
-        let correctAnswer = makeAnswer() // 랜덤 정답 생성
+    // 게임 기록 저장 (게임 횟수, 시도 횟수)
+    private var gameHistory: [(gameNumber: Int, attempts: Int)] = []
+    private var gameCount = 0 // 게임 번호 추적
+
+    // 프로그램 실행 (메뉴 표시)
+    func run() {
         while true {
-            let userInputAnswer = inputAnswer() // 사용자 입력 받기
+            showMenu()
+            if let input = readLine(), let choice = Int(input) {
+                switch choice {
+                case 1:
+                    start()
+                case 2:
+                    showGameHistory()
+                case 3:
+                    print("\n< 숫자 야구 게임을 종료합니다 >")
+                    gameHistory.removeAll() // 게임 기록 초기화
+                    return
+                default:
+                    print("\n올바른 숫자를 입력해주세요! (1 ~ 3)\n")
+                }
+            } else {
+                print("\n올바른 숫자를 입력해주세요! (1 ~ 3)\n")
+            }
+        }
+    }
+
+    // 메뉴 표시
+    private func showMenu() {
+        print("\n환영합니다! 원하시는 번호를 입력해주세요")
+        print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
+    }
+
+    // 게임 시작 메서드
+    private func start() {
+        print("\n< 게임을 시작합니다 >")
+        let correctAnswer = makeAnswer()
+        var attempts = 0 // 시도 횟수 카운트
+
+        while true {
+            let userInputAnswer = inputAnswer()
+            attempts += 1 // 입력할 때마다 시도 횟수 증가
             
-            // 사용자의 입력과 정답을 비교
             if validateAnswer(userInputAnswer, correctAnswer) {
-                print("게임을 종료합니다.") // 정답을 맞추면 게임 종료
+                print("게임을 종료합니다.")
+                gameCount += 1
+                gameHistory.append((gameCount, attempts)) // 게임 기록 저장
                 break
+            }
+        }
+    }
+
+    // 게임 기록 보기
+    private func showGameHistory() {
+        print("\n< 게임 기록 보기 >")
+        if gameHistory.isEmpty {
+            print("아직 게임 기록이 없습니다.")
+        } else {
+            for record in gameHistory {
+                print("\(record.gameNumber)번째 게임 : 시도 횟수 - \(record.attempts)")
             }
         }
     }
@@ -54,11 +122,6 @@ func makeAnswer() -> [Int] {
     }
     
     return Array(numbers.prefix(3)) // 앞에서 3개의 숫자 선택하여 반환
-}
-
-// 게임 시작 메시지 출력
-func gameIntroMessage() {
-    print(" < 게임을 시작합니다 > ")
 }
 
 // 사용자 입력을 받는 메서드 (올바른 입력이 들어올 때까지 반복)
@@ -111,7 +174,6 @@ func validateInputAnswer(_ input: String) -> [Int]? {
     return inputAnswer // 모든 검증 통과 시 변환된 숫자 배열 반환
 }
 
-
 // 정답과 사용자 입력 비교 (스트라이크 & 볼 판정)
 func validateAnswer(_ userInput: [Int], _ correctAnswer: [Int]) -> Bool {
     let (strikeCount, ballCount) = calculateScore(userInput, correctAnswer) // 점수 계산
@@ -149,4 +211,3 @@ private func displayResult(_ strike: Int, _ ball: Int) {
 
     print(result.isEmpty ? "Nothing" : result.joined(separator: ", "))
 }
-

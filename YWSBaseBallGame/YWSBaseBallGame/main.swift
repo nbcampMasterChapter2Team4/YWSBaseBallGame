@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 게임 실행
 let game = BaseBallGame()
-game.start()
+game.run()
 
