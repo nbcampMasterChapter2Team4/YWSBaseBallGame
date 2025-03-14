@@ -18,15 +18,15 @@ struct GameResult {
 
     func display() {
         if isCorrect {
-            print("정답입니다!")
+            print("홈런‼️‼️ ⚾️⚾️⚾️")
             return
         }
 
         var result = [String]()
-        if strike > 0 { result.append("\(strike) 스트라이크") }
-        if ball > 0 { result.append("\(ball) 볼") }
+        if strike > 0 { result.append(String(repeating: "🟡", count: strike)) }
+        if ball > 0 { result.append(String(repeating: "🟢", count: ball)) }
 
-        print(result.isEmpty ? "Nothing" : result.joined(separator: ", "))
+        print(result.isEmpty ? "🔴" : result.joined(separator: "\n"))
     }
 
     static func calculateScore(_ userInput: [Int], _ correctAnswer: [Int]) -> GameResult {
