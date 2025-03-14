@@ -161,12 +161,18 @@ Swift 5 이상
 ## 추가 사항
 1. 전체적인 UX 개선
 - 스트라이크와 볼의 경우 야구와 흡사하게 변경
+
+
 ![image](https://github.com/user-attachments/assets/e84312d6-ee44-4b88-bb44-c64c17853535)
 
 - `Nothing` 의 경우 아래와 같이 변경
+
+
 ![image](https://github.com/user-attachments/assets/a2ff047a-a0a2-4eb1-b599-e081e456e03a)
 
 2. 게임 설명 추가
+
+
 ![image](https://github.com/user-attachments/assets/a777df29-2aca-4df6-b42e-f4fa545e59cb)
 
 ## 트러블 슈팅 
