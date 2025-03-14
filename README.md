@@ -176,5 +176,7 @@ Swift 5 이상
 ![image](https://github.com/user-attachments/assets/a777df29-2aca-4df6-b42e-f4fa545e59cb)
 
 ## 트러블 슈팅 
+- `wholeNumberValue`가 숫자만 걸러내는 문제 해결  
+- 숫자가 아닌 문자 포함 시 입력 거부 기능 추가  
+- [트러블슈팅 블로그 포스트](https://sheep1sik.tistory.com/162)
 
-  
