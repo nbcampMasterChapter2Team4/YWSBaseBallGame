@@ -11,5 +11,6 @@ import Foundation
 enum MenuOption: Int {
     case start = 1
     case history = 2
-    case exit = 3
+    case description = 3
+    case exit = 4
 }

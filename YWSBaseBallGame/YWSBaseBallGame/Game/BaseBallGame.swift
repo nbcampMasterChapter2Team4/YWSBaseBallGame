@@ -59,21 +59,23 @@ final class BaseBallGame {
                     start()
                 case .history:
                     gameHistory.showGameHistory()
+                case .description:
+                    showGameDescription()
                 case .exit:
                     print("\n< 숫자 야구 게임을 종료합니다 >")
                     gameHistory.clearHistory() // 게임 기록 초기화
                     return
                 }
             } else {
-                print("\n올바른 숫자를 입력해주세요! (1 ~ 3)\n")
+                print("\n ⚠️ 올바른 숫자를 입력해주세요! (1 ~ 4) ⚠️\n")
             }
         }
     }
 
     // 메뉴 표시
     private func showMenu() {
-        print("\n환영합니다! 원하시는 번호를 입력해주세요")
-        print("1. 게임 시작하기  2. 게임 기록 보기  3. 종료하기")
+        print("\n ⚾️ 환영합니다! 원하시는 번호를 입력해주세요 ⚾️")
+        print("1. 게임 시작하기  2. 게임 기록 보기  3. 게임 설명  4. 종료하기")
     }
 
     // 게임 시작 메서드
